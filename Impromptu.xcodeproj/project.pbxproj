@@ -1,0 +1,413 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1000001000000000000E6F1 /* ImpromptuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E5F1 /* ImpromptuApp.swift */; };
+		A1000001000000000000E6F2 /* AppMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E5F2 /* AppMenu.swift */; };
+		A1000001000000000000E6F3 /* StudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E5F3 /* StudioView.swift */; };
+		A1000001000000000000E6F4 /* MIDIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E5F5 /* MIDIManager.swift */; };
+		A1000001000000000000E6F5 /* MIDIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E5F6 /* MIDIEvent.swift */; };
+		A1000001000000000000E6F6 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E5F7 /* AudioEngine.swift */; };
+		A1000001000000000000E6F7 /* AppServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E5F8 /* AppServices.swift */; };
+		A1000001000000000000E6F8 /* TimedMIDIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E5F9 /* TimedMIDIEvent.swift */; };
+		A1000001000000000000E6F9 /* RecordingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E5FA /* RecordingEngine.swift */; };
+		A1000001000000000000E6FA /* MIDIFileWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E5FB /* MIDIFileWriter.swift */; };
+		A1000001000000000000E6FB /* RecordingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E5FC /* RecordingItem.swift */; };
+		A1000001000000000000E6FC /* RecordingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E5FD /* RecordingStore.swift */; };
+		A1000001000000000000E6FD /* BPMSaveSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E5FE /* BPMSaveSheet.swift */; };
+		A1000001000000000000E6FE /* ScheduledMIDIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E5FF /* ScheduledMIDIEvent.swift */; };
+		A1000001000000000000E6FF /* InstrumentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E600 /* InstrumentList.swift */; };
+		A1000001000000000000E700 /* MIDIFileReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E601 /* MIDIFileReader.swift */; };
+		A1000001000000000000E701 /* MIDIPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E602 /* MIDIPlayer.swift */; };
+		A1000001000000000000E702 /* SoundFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E603 /* SoundFont.swift */; };
+		A1000001000000000000E703 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E604 /* SettingsStore.swift */; };
+		A1000001000000000000E704 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E605 /* SettingsView.swift */; };
+		A1000001000000000000E705 /* SoundFontDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E606 /* SoundFontDownloader.swift */; };
+		A1000001000000000000E706 /* ScoreRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E607 /* ScoreRenderer.swift */; };
+		A1000001000000000000E707 /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E608 /* ScoreView.swift */; };
+		A1000001000000000000E708 /* ScoreWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E609 /* ScoreWindow.swift */; };
+		A1000001000000000000E709 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000E60A /* Assets.xcassets */; };
+		AABBCCDD00110011AABBCCEE /* vexflow.js in Resources */ = {isa = PBXBuildFile; fileRef = AABBCCDD00110011AABBCCDD /* vexflow.js */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A1000001000000000000E1F6 /* Impromptu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Impromptu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1000001000000000000E5F1 /* ImpromptuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpromptuApp.swift; sourceTree = "<group>"; };
+		A1000001000000000000E5F2 /* AppMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMenu.swift; sourceTree = "<group>"; };
+		A1000001000000000000E5F3 /* StudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudioView.swift; sourceTree = "<group>"; };
+		A1000001000000000000E5F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1000001000000000000E5F5 /* MIDIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIManager.swift; sourceTree = "<group>"; };
+		A1000001000000000000E5F6 /* MIDIEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIEvent.swift; sourceTree = "<group>"; };
+		A1000001000000000000E5F7 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
+		A1000001000000000000E5F8 /* AppServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppServices.swift; sourceTree = "<group>"; };
+		A1000001000000000000E5F9 /* TimedMIDIEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedMIDIEvent.swift; sourceTree = "<group>"; };
+		A1000001000000000000E5FA /* RecordingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingEngine.swift; sourceTree = "<group>"; };
+		A1000001000000000000E5FB /* MIDIFileWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIFileWriter.swift; sourceTree = "<group>"; };
+		A1000001000000000000E5FC /* RecordingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingItem.swift; sourceTree = "<group>"; };
+		A1000001000000000000E5FD /* RecordingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingStore.swift; sourceTree = "<group>"; };
+		A1000001000000000000E5FE /* BPMSaveSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPMSaveSheet.swift; sourceTree = "<group>"; };
+		A1000001000000000000E5FF /* ScheduledMIDIEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledMIDIEvent.swift; sourceTree = "<group>"; };
+		A1000001000000000000E600 /* InstrumentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentList.swift; sourceTree = "<group>"; };
+		A1000001000000000000E601 /* MIDIFileReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIFileReader.swift; sourceTree = "<group>"; };
+		A1000001000000000000E602 /* MIDIPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIPlayer.swift; sourceTree = "<group>"; };
+		A1000001000000000000E603 /* SoundFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundFont.swift; sourceTree = "<group>"; };
+		A1000001000000000000E604 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
+		A1000001000000000000E605 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A1000001000000000000E606 /* SoundFontDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundFontDownloader.swift; sourceTree = "<group>"; };
+		A1000001000000000000E607 /* ScoreRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreRenderer.swift; sourceTree = "<group>"; };
+		A1000001000000000000E608 /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
+		A1000001000000000000E609 /* ScoreWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreWindow.swift; sourceTree = "<group>"; };
+		A1000001000000000000E60A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AABBCCDD00110011AABBCCDD /* vexflow.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = vexflow.js; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A1000001000000000000E2F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A1000001000000000000E1F3 = {
+			isa = PBXGroup;
+			children = (
+				A1000001000000000000E4F1 /* Impromptu */,
+				A1000001000000000000E1F4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A1000001000000000000E1F4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A1000001000000000000E1F6 /* Impromptu.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A1000001000000000000E4F1 /* Impromptu */ = {
+			isa = PBXGroup;
+			children = (
+				A1000001000000000000E5F1 /* ImpromptuApp.swift */,
+				A1000001000000000000E5F2 /* AppMenu.swift */,
+				A1000001000000000000E5F3 /* StudioView.swift */,
+				A1000001000000000000E5F5 /* MIDIManager.swift */,
+				A1000001000000000000E5F6 /* MIDIEvent.swift */,
+				A1000001000000000000E5F7 /* AudioEngine.swift */,
+				A1000001000000000000E5F8 /* AppServices.swift */,
+				A1000001000000000000E5F9 /* TimedMIDIEvent.swift */,
+				A1000001000000000000E5FA /* RecordingEngine.swift */,
+				A1000001000000000000E5FB /* MIDIFileWriter.swift */,
+				A1000001000000000000E5FC /* RecordingItem.swift */,
+				A1000001000000000000E5FD /* RecordingStore.swift */,
+				A1000001000000000000E5FE /* BPMSaveSheet.swift */,
+				A1000001000000000000E5FF /* ScheduledMIDIEvent.swift */,
+				A1000001000000000000E600 /* InstrumentList.swift */,
+				A1000001000000000000E601 /* MIDIFileReader.swift */,
+				A1000001000000000000E602 /* MIDIPlayer.swift */,
+				A1000001000000000000E603 /* SoundFont.swift */,
+				A1000001000000000000E604 /* SettingsStore.swift */,
+				A1000001000000000000E605 /* SettingsView.swift */,
+				A1000001000000000000E606 /* SoundFontDownloader.swift */,
+				A1000001000000000000E607 /* ScoreRenderer.swift */,
+				A1000001000000000000E608 /* ScoreView.swift */,
+				A1000001000000000000E609 /* ScoreWindow.swift */,
+				AABBCCDD00110011AABBCCDD /* vexflow.js */,
+				A1000001000000000000E60A /* Assets.xcassets */,
+				A1000001000000000000E5F4 /* Info.plist */,
+			);
+			path = Impromptu;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A1000001000000000000E1F5 /* Impromptu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1000001000000000000E3F5 /* Build configuration list for PBXNativeTarget "Impromptu" */;
+			buildPhases = (
+				A1000001000000000000E2F1 /* Sources */,
+				A1000001000000000000E2F2 /* Resources */,
+				A1000001000000000000E2F3 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Impromptu;
+			productName = Impromptu;
+			productReference = A1000001000000000000E1F6 /* Impromptu.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A1000001000000000000E1F2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					A1000001000000000000E1F5 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+				};
+			};
+			buildConfigurationList = A1000001000000000000E3F6 /* Build configuration list for PBXProject "Impromptu" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A1000001000000000000E1F3;
+			productRefGroup = A1000001000000000000E1F4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A1000001000000000000E1F5 /* Impromptu */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A1000001000000000000E2F2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AABBCCDD00110011AABBCCEE /* vexflow.js in Resources */,
+				A1000001000000000000E709 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A1000001000000000000E2F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000001000000000000E6F1 /* ImpromptuApp.swift in Sources */,
+				A1000001000000000000E6F2 /* AppMenu.swift in Sources */,
+				A1000001000000000000E6F3 /* StudioView.swift in Sources */,
+				A1000001000000000000E6F4 /* MIDIManager.swift in Sources */,
+				A1000001000000000000E6F5 /* MIDIEvent.swift in Sources */,
+				A1000001000000000000E6F6 /* AudioEngine.swift in Sources */,
+				A1000001000000000000E6F7 /* AppServices.swift in Sources */,
+				A1000001000000000000E6F8 /* TimedMIDIEvent.swift in Sources */,
+				A1000001000000000000E6F9 /* RecordingEngine.swift in Sources */,
+				A1000001000000000000E6FA /* MIDIFileWriter.swift in Sources */,
+				A1000001000000000000E6FB /* RecordingItem.swift in Sources */,
+				A1000001000000000000E6FC /* RecordingStore.swift in Sources */,
+				A1000001000000000000E6FD /* BPMSaveSheet.swift in Sources */,
+				A1000001000000000000E6FE /* ScheduledMIDIEvent.swift in Sources */,
+				A1000001000000000000E6FF /* InstrumentList.swift in Sources */,
+				A1000001000000000000E700 /* MIDIFileReader.swift in Sources */,
+				A1000001000000000000E701 /* MIDIPlayer.swift in Sources */,
+				A1000001000000000000E702 /* SoundFont.swift in Sources */,
+				A1000001000000000000E703 /* SettingsStore.swift in Sources */,
+				A1000001000000000000E704 /* SettingsView.swift in Sources */,
+				A1000001000000000000E705 /* SoundFontDownloader.swift in Sources */,
+				A1000001000000000000E706 /* ScoreRenderer.swift in Sources */,
+				A1000001000000000000E707 /* ScoreView.swift in Sources */,
+				A1000001000000000000E708 /* ScoreWindow.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A1000001000000000000E3F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Impromptu/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.ceinfactory.app.impromptu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A1000001000000000000E3F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Impromptu/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.ceinfactory.app.impromptu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A1000001000000000000E3F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_LOOPS = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A1000001000000000000E3F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_LOOPS = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A1000001000000000000E3F5 /* Build configuration list for PBXNativeTarget "Impromptu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1000001000000000000E3F1 /* Debug */,
+				A1000001000000000000E3F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1000001000000000000E3F6 /* Build configuration list for PBXProject "Impromptu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1000001000000000000E3F3 /* Debug */,
+				A1000001000000000000E3F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A1000001000000000000E1F2 /* Project object */;
+}
