@@ -80,3 +80,7 @@ ExportOptions.plist
 
 # 테스트 커버리지
 *.xcresult/
+
+# 빌드 산출물 (배포용 DMG, 추출된 앱 번들)
+*.dmg
+*.app/
