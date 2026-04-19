@@ -63,8 +63,8 @@
 		A1000001000000000000E608 /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		A1000001000000000000E609 /* ScoreWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreWindow.swift; sourceTree = "<group>"; };
 		A1000001000000000000E60A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AABBCCDD00110011AABBCCDD /* vexflow.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = vexflow.js; sourceTree = "<group>"; };
 		A1000001000000000000E60B /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
+		AABBCCDD00110011AABBCCDD /* vexflow.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = vexflow.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
