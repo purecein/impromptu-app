@@ -34,6 +34,26 @@ Xcode에서는 `⌘B` 빌드, `⌘R` 실행, `⌘U` 테스트.
 > `Local.xcconfig.template`을 복사해 `Local.xcconfig`를 만들고 본인 Team ID를 입력.
 > `Local.xcconfig`는 `.gitignore`에 포함되어 커밋되지 않음.
 
+> **pre-commit 훅 설치 (최초 1회)**
+> Xcode가 서명 설정 변경 시 `project.pbxproj`에 Team ID를 기록한다.
+> 아래 명령으로 훅을 설치하면 커밋 직전에 자동으로 제거된다.
+> `.git/` 디렉토리는 git이 추적하지 않으므로 클론 후 반드시 수동 설치 필요:
+> ```bash
+> cat > .git/hooks/pre-commit << 'EOF'
+> #!/usr/bin/env bash
+> PBXPROJ="Impromptu.xcodeproj/project.pbxproj"
+> if git diff --cached --name-only | grep -q "$PBXPROJ"; then
+>     if grep -q "DEVELOPMENT_TEAM = [^\"\"]*[^;]" "$PBXPROJ" 2>/dev/null; then
+>         sed -i '' 's/DEVELOPMENT_TEAM = [^;]*;/DEVELOPMENT_TEAM = "";/g' "$PBXPROJ"
+>         git add "$PBXPROJ"
+>         echo "ℹ️  pre-commit: DEVELOPMENT_TEAM을 project.pbxproj에서 제거했습니다."
+>     fi
+> fi
+> exit 0
+> EOF
+> chmod +x .git/hooks/pre-commit
+> ```
+
 ---
 
 ## 프로젝트 개요 및 핵심 컨셉
