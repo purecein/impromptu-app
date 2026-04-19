@@ -82,6 +82,26 @@ xcodebuild -scheme Impromptu -configuration Debug test \
 
 > **주의:** `Local.xcconfig`는 `.gitignore`에 포함되어 있으므로 커밋되지 않습니다.
 
+### 5. pre-commit 훅 설치 (기여자 전용)
+
+Xcode는 서명 설정을 변경할 때마다 `project.pbxproj`에 Team ID를 기록합니다. pre-commit 훅을 설치하면 커밋 직전에 자동으로 제거되어 저장소에 올라가지 않습니다.
+
+```bash
+cat > .git/hooks/pre-commit << 'EOF'
+#!/usr/bin/env bash
+PBXPROJ="Impromptu.xcodeproj/project.pbxproj"
+if git diff --cached --name-only | grep -q "$PBXPROJ"; then
+    if grep -q "DEVELOPMENT_TEAM = [^\"\"]*[^;]" "$PBXPROJ" 2>/dev/null; then
+        sed -i '' 's/DEVELOPMENT_TEAM = [^;]*;/DEVELOPMENT_TEAM = "";/g' "$PBXPROJ"
+        git add "$PBXPROJ"
+        echo "ℹ️  pre-commit: DEVELOPMENT_TEAM을 project.pbxproj에서 제거했습니다."
+    fi
+fi
+exit 0
+EOF
+chmod +x .git/hooks/pre-commit
+```
+
 ---
 
 ## 사운드폰트

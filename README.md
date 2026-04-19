@@ -84,6 +84,26 @@ xcodebuild -scheme Impromptu -configuration Debug test \
 
 > **Note:** `Local.xcconfig` is listed in `.gitignore` and will never be committed.
 
+### 5. Install the pre-commit hook (contributors only)
+
+Xcode writes your Team ID back into `project.pbxproj` whenever you change signing settings. The pre-commit hook strips it automatically before every commit so it never reaches the repository.
+
+```bash
+cat > .git/hooks/pre-commit << 'EOF'
+#!/usr/bin/env bash
+PBXPROJ="Impromptu.xcodeproj/project.pbxproj"
+if git diff --cached --name-only | grep -q "$PBXPROJ"; then
+    if grep -q "DEVELOPMENT_TEAM = [^\"\"]*[^;]" "$PBXPROJ" 2>/dev/null; then
+        sed -i '' 's/DEVELOPMENT_TEAM = [^;]*;/DEVELOPMENT_TEAM = "";/g' "$PBXPROJ"
+        git add "$PBXPROJ"
+        echo "ℹ️  pre-commit: DEVELOPMENT_TEAM stripped from project.pbxproj"
+    fi
+fi
+exit 0
+EOF
+chmod +x .git/hooks/pre-commit
+```
+
 ---
 
 ## Soundfonts
