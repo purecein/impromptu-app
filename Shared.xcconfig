@@ -1,0 +1,10 @@
+// Shared.xcconfig
+//
+// 커밋되는 공유 빌드 설정 파일.
+// Local.xcconfig (gitignored) 가 있으면 그 값을 덮어씌운다.
+// 없으면 조용히 무시된다 (?는 optional include).
+//
+// 기여자 설정 방법:
+//   cp Local.xcconfig.template Local.xcconfig
+//   Local.xcconfig 에서 DEVELOPMENT_TEAM 값을 본인 Team ID로 교체
+#include? "Local.xcconfig"

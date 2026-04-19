@@ -64,6 +64,7 @@
 		A1000001000000000000E609 /* ScoreWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreWindow.swift; sourceTree = "<group>"; };
 		A1000001000000000000E60A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AABBCCDD00110011AABBCCDD /* vexflow.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = vexflow.js; sourceTree = "<group>"; };
+		A1000001000000000000E60B /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +83,7 @@
 			children = (
 				A1000001000000000000E4F1 /* Impromptu */,
 				A1000001000000000000E1F4 /* Products */,
+				A1000001000000000000E60B /* Shared.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -229,6 +231,7 @@
 /* Begin XCBuildConfiguration section */
 		A1000001000000000000E3F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A1000001000000000000E60B /* Shared.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -254,6 +257,7 @@
 		};
 		A1000001000000000000E3F2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A1000001000000000000E60B /* Shared.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
