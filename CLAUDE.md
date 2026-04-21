@@ -117,10 +117,195 @@ Xcode에서는 `⌘B` 빌드, `⌘R` 실행, `⌘U` 테스트.
 | 파일 | 역할 |
 |------|------|
 | `StudioView.swift` | 메인 스튜디오 창. 레코딩 버튼, 사운드폰트·악기 선택, 레코딩 목록(`RecordingRow`). |
-| `SettingsView.swift` | 설정 창. 출력 장치, 저장 모드, MIDI 장치 활성화, MIDI Learn 트리거 설정. |
-| `AppMenu.swift` | MenuBar 드롭다운 메뉴. 레코딩 토글, 창 열기 단축키. |
-| `BPMSaveSheet.swift` | BPM 입력 시트 (저장/편집 공용). |
+| `SettingsView.swift` | 설정 창 (NavigationSplitView). 출력 장치, 저장 모드, MIDI 장치 활성화, MIDI Learn 트리거 설정. |
+| `AppMenu.swift` | MenuBar 드롭다운 메뉴. 레코딩 토글(⌘R), 창 열기(⌘O), 설정(⌘,), 종료(⌘Q). |
+| `BPMSaveSheet.swift` | BPM 입력 시트 (저장/편집 공용). 유효 범위 20–300. |
 | `SettingsStore.swift` | `UserDefaults` 기반 앱 설정. `SaveMode`, `DeviceTriggers`, `LearningTarget`. |
+
+> **⚠️ 데드 코드**: `RecordingEngine.swift`는 현재 `RecordingStore.swift`로 대체됐으며 실제로 사용되지 않는다. 향후 제거 가능.
+
+---
+
+## 주요 타입 / API 레퍼런스
+
+### MIDIEvent enum
+```swift
+enum MIDIEvent {
+    case noteOn(channel: UInt8, note: UInt8, velocity: UInt8)
+    case noteOff(channel: UInt8, note: UInt8)
+    case controlChange(channel: UInt8, controller: UInt8, value: UInt8)
+    case pitchBend(channel: UInt8, value: Int16)       // -8192…8191
+    case aftertouch(channel: UInt8, pressure: UInt8)
+    case programChange(channel: UInt8, program: UInt8)
+}
+```
+
+### RecordingStore — @Published 프로퍼티
+```swift
+@Published var items: [RecordingItem]
+@Published var isRecording: Bool
+@Published var showBPMSheet: Bool
+// 내부 (Published 아님):
+var pendingSaveItemID: UUID?
+var inFlightTracks: [String: [TimedMIDIEvent]]   // sourceName → 이벤트 버퍼
+var recordingFlag: Bool                           // NSLock 내부에서만 변경
+var recordingStartTime: UInt64                    // mach_absolute_time
+var capturedInstrumentName: String
+var capturedSoundFontTag: String
+```
+
+### RecordingStore — 레코딩 상태 전이
+```
+idle
+ └→ startRecording()
+       └→ recordingFlag = true (락 내부 마지막)
+       └→ isRecording = true
+             │
+             ├─ addEvent() [CoreMIDI 스레드, NSLock]
+             │     └→ 첫 이벤트 시 PC 이벤트 삽입 (소스별 1회)
+             │
+             └→ stopRecording()
+                   └→ recordingFlag = false
+                   └→ 열린 noteOn → noteOff 삽입
+                   └→ unsaved RecordingItem 생성
+                   └→ saveMode == .dialog → showBPMSheet = true
+                   └→ saveMode == .auto  → savePending(bpm: defaultBPM)
+                         └→ MIDIFileWriter.build() → 파일 저장
+                         └→ item 상태 .saved 전환
+```
+
+### AudioEngine — @Published 프로퍼티
+```swift
+@Published var availableSoundFonts: [SoundFont]
+@Published var selectedSoundFont: SoundFont?
+@Published var currentProgram: Int
+@Published var isFallbackMode: Bool
+@Published var outputDevices: [AudioOutputDevice]   // AudioDeviceID + name + uid
+// UserDefaults 키:
+//   "impromptu.soundFontID", "impromptu.instrumentProgram", "impromptu.outputDeviceUID"
+// 상수:
+let dlsIdentifier = "builtin_dls"
+let systemDLSURL  = "/System/Library/Components/CoreAudio.component/Contents/Resources/gs_instruments.dls"
+```
+
+### MIDIPlayer — API
+```swift
+@Published var playingItemID: UUID?
+func play(url: URL, itemID: UUID)   // 파일 로드 → preparePlayback → 백그라운드 Task
+func stop()                          // Task 취소 → stopPlayback() → CC 123 브로드캐스트
+func isPlaying(_ itemID: UUID) -> Bool
+```
+
+### SettingsStore — 주요 타입
+```swift
+enum SaveMode: String { case dialog, case auto }
+
+struct TriggerEvent {
+    enum Kind { case note, case cc }
+    var kind: Kind
+    var number: UInt8    // note 번호 또는 CC 번호
+}
+struct DeviceTriggers {
+    var start: TriggerEvent?
+    var stop: TriggerEvent?
+}
+struct LearningTarget {
+    enum Role { case start, case stop }
+    var sourceName: String
+    var role: Role
+}
+```
+
+### SettingsStore — @Published 프로퍼티 & 메서드
+```swift
+@Published var saveMode: SaveMode
+@Published var defaultBPM: Int
+@Published var saveDirectory: URL
+@Published var disabledSources: Set<String>
+@Published var deviceTriggers: [String: DeviceTriggers]  // normalizedName → triggers
+@Published var learningTarget: LearningTarget?
+@Published var outputDeviceUID: String
+
+func isStartTrigger(_ event: MIDIEvent, source: String) -> Bool  // noteOn vel>0, CC val>0
+func isStopTrigger(_ event: MIDIEvent, source: String) -> Bool
+func startLearning(source: String, role: Role)
+func learnTrigger(_ event: MIDIEvent, source: String)
+func cancelLearning()
+func clearTrigger(source: String, role: Role)  // 양쪽 nil이면 딕셔너리 항목 제거
+```
+
+### SettingsSection enum (SettingsView)
+```swift
+enum SettingsSection { case midi, case audio, case save, case soundFont, case about }
+```
+
+### SoundFontDownloader — @Published 프로퍼티
+```swift
+@Published var downloadingID: String?
+@Published var progress: Double
+@Published var isExtracting: Bool
+@Published var installedIDs: Set<String>
+@Published var errorMessage: String?
+// 설치 경로: ~/Library/Application Support/Impromptu/SoundFonts/
+```
+
+### AppServices — MIDI 라우팅 순서
+```
+onMIDIEvent(event, hostTime, sourceName)
+  1. MIDI Learn 모드 활성 → learnTrigger() 호출 후 return
+  2. disabledSources 포함 → skip
+  3. audioEngine.handle(event)          ← 트리거 이벤트도 소리는 냄
+  4. isStartTrigger() → startRecording() 후 return  ← 이벤트 녹음 제외
+  5. isStopTrigger()  → stopRecording()  후 return  ← 이벤트 녹음 제외
+  6. recordingStore.addEvent(event, hostTime, sourceName)
+```
+
+### MIDIManager — 주요 API
+```swift
+var onMIDIEvent: ((MIDIEvent, UInt64, String) -> Void)?  // event, hostTime, normalizedName
+static func normalizedName(_ displayName: String) -> String  // 마지막 공백 토큰 반환
+// PC(0xC0) 이벤트: 파싱은 하되 onMIDIEvent 콜백에서 제외
+// Running status 지원: statusByte & 0x80 == 0이면 이전 statusByte 재사용
+```
+
+### MIDIFileReader — MIDIParseResult
+```swift
+struct MIDIParseResult {
+    var tickEvents: [TickedMIDIEvent]
+    var scheduledEvents: [ScheduledMIDIEvent]
+    var bpm: Int
+    var ppqn: UInt16
+    var durationSeconds: TimeInterval
+    var instrumentName: String    // Meta 0x04
+    var soundFontTag: String      // Meta 0x01 ("SF2:name" 또는 "DLS:System")
+}
+```
+
+### ScoreRenderer — 상수 및 내부 타입
+```swift
+// 상수
+let ppqn               = 480
+let ticksPerMeasure    = 1920   // 4/4
+let quantizeGridTicks  = 120    // 16분음표
+let chordThresholdTicks = 30    // 화음 묶기 임계값 (raw tick 공간)
+
+// Duration 테이블 (ticks → VexFlow 표기)
+// 1920→"w", 1440→"h." , 960→"h", 720→"q.", 480→"q", 360→"8.", 240→"8", 120→"16"
+
+// 내부 구조체
+struct RawNote       { startTick, duration: Int; midiNote: UInt8 }
+struct RawChordGroup { start, maxDur: Int; notes: [UInt8] }
+struct QuantizedGroup{ start, dur: Int; notes: [UInt8] }
+struct BeatSlot      { dur: Dur; midiNotes: [UInt8] }  // 비어있으면 쉼표
+```
+
+### @EnvironmentObject 사용 현황
+| 뷰 | 주입받는 객체 |
+|---|---|
+| `StudioView` | midiManager, recordingStore, audioEngine, midiPlayer, settings |
+| `SettingsView` | midiManager, audioEngine, settings, sfDownloader |
+| `AppMenu` | midiManager, recordingStore, settings |
+| `ScoreWindowContent` | holder (ScoreWebViewHolder) |
 
 ---
 
