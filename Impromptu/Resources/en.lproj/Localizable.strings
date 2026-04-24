@@ -1,0 +1,147 @@
+/* =============================================================
+   Impromptu — Localizable.strings (English)
+   ============================================================= */
+
+// MARK: - Menu Bar
+
+"menubar.title.idle"             = "Idle";
+"menubar.title.recording"        = "Recording";
+"menubar.status.no_device"       = "No MIDI device connected";
+"menubar.status.all_disabled"    = "All MIDI devices are disabled";
+"menubar.button.record_start"    = "Start Recording";
+"menubar.button.record_stop"     = "Stop Recording";
+"menubar.button.open_studio"     = "Open Studio";
+"menubar.button.settings"        = "Settings...";
+"menubar.button.quit"            = "Quit";
+
+// MARK: - Studio
+
+"studio.status.idle"             = "Idle";
+"studio.status.recording"        = "Recording";
+"studio.button.record_start"     = "Start Recording";
+"studio.button.record_stop"      = "Stop Recording";
+"studio.help.no_device"          = "No MIDI device connected";
+"studio.help.all_disabled"       = "All MIDI devices are disabled. Enable devices in Settings.";
+"studio.picker.soundfont"        = "Soundfont";
+"studio.soundfont.system_dls"    = "System Default (DLS)";
+"studio.soundfont.low_quality"   = "Quality: Low";
+
+"studio.accessibility.soundfont" = "Select Soundfont";
+"studio.accessibility.category"  = "Select Instrument Category";
+"studio.accessibility.instrument"= "Select Instrument";
+
+"studio.list.title"              = "Recordings";
+"studio.list.count"              = "%d recordings";
+"studio.list.empty"              = "Recordings will appear here";
+
+"studio.row.unsaved"             = "Unsaved";
+"studio.row.time.just_now"       = "Just now";
+"studio.row.time.today"          = "Today";
+"studio.row.time.yesterday"      = "Yesterday";
+"studio.row.duration.min_sec"    = "%dm %ds";
+"studio.row.duration.sec"        = "%ds";
+"studio.row.button.save"         = "Save";
+"studio.row.accessibility.play"  = "Play";
+"studio.row.accessibility.stop"  = "Stop";
+"studio.row.accessibility.score" = "View Score";
+"studio.row.accessibility.bpm"   = "Edit BPM";
+"studio.row.accessibility.finder"= "Show in Finder";
+"studio.row.accessibility.delete"= "Delete";
+
+"studio.alert.delete.title"      = "Delete this file?";
+"studio.alert.delete.message"    = "The file will also be deleted from Finder.";
+"studio.alert.delete.confirm"    = "Delete";
+"studio.alert.delete.cancel"     = "Cancel";
+
+"studio.sheet.bpm_save"          = "Save Recording";
+"studio.sheet.bpm_edit"          = "Edit BPM";
+
+// MARK: - Settings Sidebar
+
+"settings.sidebar.midi"          = "MIDI";
+"settings.sidebar.audio"         = "Audio";
+"settings.sidebar.save"          = "Save";
+"settings.sidebar.soundfont"     = "Soundfonts";
+"settings.sidebar.about"         = "About";
+
+// MARK: - Settings › MIDI
+
+"settings.midi.section.devices"  = "Input Devices";
+"settings.midi.no_device"        = "No MIDI devices connected";
+"settings.midi.sound_effect"     = "Play sound effect on record start / stop";
+"settings.midi.trigger.start"    = "Start";
+"settings.midi.trigger.stop"     = "Stop";
+/* %1$@ = device name, %2$@ = role (start/stop) */
+"settings.midi.trigger.learn_hint" = "Press the button on %1$@ to use as %2$@";
+"settings.midi.trigger.role.start" = "start";
+"settings.midi.trigger.role.stop"  = "stop";
+
+// MARK: - Settings › Audio
+
+"settings.audio.section.output"  = "Output";
+"settings.audio.output_device"   = "Output Device";
+"settings.audio.system_default"  = "System Default";
+
+// MARK: - Settings › Save
+
+"settings.save.default_bpm"      = "Default BPM";
+"settings.save.mode"             = "Save Mode";
+"settings.save.directory"        = "Save Directory";
+"settings.save.change"           = "Change";
+"settings.save.mode.dialog"      = "Dialog (Enter BPM)";
+"settings.save.mode.auto"        = "Auto Save (Use Default BPM)";
+
+// MARK: - Settings › Soundfonts
+
+/* %d = size in MB */
+"settings.soundfont.size"        = "~%d MB";
+"settings.soundfont.installed"   = "Installed";
+"settings.soundfont.extracting"  = "Extracting...";
+"settings.soundfont.download"    = "Download";
+"settings.soundfont.cancel"      = "Cancel";
+/* %@ = soundfont display name */
+"settings.soundfont.accessibility.delete" = "Delete %@";
+"settings.soundfont.error.title" = "Download Failed";
+"settings.soundfont.error.confirm" = "OK";
+/* %@ = error description */
+"settings.soundfont.error.extract" = "Extraction failed: %@";
+"settings.soundfont.error.save"    = "Save failed: %@";
+
+// MARK: - Settings › About
+
+/* %@ = version string */
+"settings.about.version"         = "Version %@";
+"settings.about.developer"       = "Developer";
+"settings.about.email"           = "Email";
+"settings.about.github"          = "GitHub";
+"settings.about.bundle_id"       = "Bundle ID";
+
+// MARK: - Trigger Row
+
+"trigger.none"                   = "None";
+"trigger.clear"                  = "Clear";
+"trigger.learn"                  = "Learn";
+"trigger.cancel"                 = "Cancel";
+/* %@ = role label (Start / Stop) */
+"trigger.accessibility.clear"         = "Clear %@ trigger";
+"trigger.accessibility.learn_start"   = "Start learning %@ trigger";
+"trigger.accessibility.learn_cancel"  = "Cancel learning %@ trigger";
+
+// MARK: - BPM Sheet
+
+"bpm.title.save"                 = "Save Recording";
+"bpm.title.edit"                 = "Edit BPM";
+"bpm.hint"                       = "Enter BPM to open on a grid\nin your DAW";
+"bpm.button.cancel"              = "Cancel";
+"bpm.button.save"                = "Save";
+
+// MARK: - Score Viewer
+
+"score.window.title"             = "Impromptu — Score";
+"score.empty"                    = "No saved file";
+"score.export.converting"        = "Converting…";
+"score.export.button"            = "Export PDF";
+/* %@ = error description */
+"score.export.error.convert"     = "PDF conversion failed: %@";
+"score.export.error.save"        = "Save failed: %@";
+"score.button.close"             = "Close";

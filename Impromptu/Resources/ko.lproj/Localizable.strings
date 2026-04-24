@@ -1,0 +1,147 @@
+/* =============================================================
+   Impromptu — Localizable.strings (한국어)
+   ============================================================= */
+
+// MARK: - 메뉴바
+
+"menubar.title.idle"             = "대기 중";
+"menubar.title.recording"        = "레코딩 중";
+"menubar.status.no_device"       = "MIDI 장치가 연결되지 않았습니다";
+"menubar.status.all_disabled"    = "모든 MIDI 장치가 비활성화되었습니다";
+"menubar.button.record_start"    = "레코딩 시작";
+"menubar.button.record_stop"     = "레코딩 종료";
+"menubar.button.open_studio"     = "스튜디오 열기";
+"menubar.button.settings"        = "설정...";
+"menubar.button.quit"            = "종료";
+
+// MARK: - 스튜디오
+
+"studio.status.idle"             = "대기 중";
+"studio.status.recording"        = "레코딩 중";
+"studio.button.record_start"     = "레코딩 시작";
+"studio.button.record_stop"      = "레코딩 종료";
+"studio.help.no_device"          = "MIDI 장치가 연결되지 않았습니다";
+"studio.help.all_disabled"       = "모든 MIDI 장치가 비활성화되었습니다. 설정에서 장치를 활성화하세요.";
+"studio.picker.soundfont"        = "사운드폰트";
+"studio.soundfont.system_dls"    = "시스템 기본 (DLS)";
+"studio.soundfont.low_quality"   = "음질: 낮음";
+
+"studio.accessibility.soundfont" = "사운드폰트 선택";
+"studio.accessibility.category"  = "악기 카테고리 선택";
+"studio.accessibility.instrument"= "악기 선택";
+
+"studio.list.title"              = "레코딩 파일";
+"studio.list.count"              = "%d개";
+"studio.list.empty"              = "레코딩을 시작하면 여기에 표시됩니다";
+
+"studio.row.unsaved"             = "미저장";
+"studio.row.time.just_now"       = "방금";
+"studio.row.time.today"          = "오늘";
+"studio.row.time.yesterday"      = "어제";
+"studio.row.duration.min_sec"    = "%d분 %d초";
+"studio.row.duration.sec"        = "%d초";
+"studio.row.button.save"         = "저장";
+"studio.row.accessibility.play"  = "재생";
+"studio.row.accessibility.stop"  = "재생 중지";
+"studio.row.accessibility.score" = "악보 보기";
+"studio.row.accessibility.bpm"   = "BPM 편집";
+"studio.row.accessibility.finder"= "Finder에서 열기";
+"studio.row.accessibility.delete"= "삭제";
+
+"studio.alert.delete.title"      = "이 파일을 삭제하시겠습니까?";
+"studio.alert.delete.message"    = "Finder에서도 파일이 삭제됩니다.";
+"studio.alert.delete.confirm"    = "삭제";
+"studio.alert.delete.cancel"     = "취소";
+
+"studio.sheet.bpm_save"          = "레코딩 저장";
+"studio.sheet.bpm_edit"          = "BPM 편집";
+
+// MARK: - 설정 사이드바
+
+"settings.sidebar.midi"          = "MIDI";
+"settings.sidebar.audio"         = "오디오";
+"settings.sidebar.save"          = "저장";
+"settings.sidebar.soundfont"     = "사운드폰트";
+"settings.sidebar.about"         = "정보";
+
+// MARK: - 설정 › MIDI
+
+"settings.midi.section.devices"  = "입력 장치";
+"settings.midi.no_device"        = "연결된 MIDI 장치 없음";
+"settings.midi.sound_effect"     = "레코딩 시작 / 종료 시 효과음 재생";
+"settings.midi.trigger.start"    = "시작";
+"settings.midi.trigger.stop"     = "종료";
+/* %1$@ = 장치명, %2$@ = 역할 (시작/종료) */
+"settings.midi.trigger.learn_hint" = "%1$@에서 %2$@로 사용할 버튼을 누르세요";
+"settings.midi.trigger.role.start" = "시작";
+"settings.midi.trigger.role.stop"  = "종료";
+
+// MARK: - 설정 › 오디오
+
+"settings.audio.section.output"  = "출력";
+"settings.audio.output_device"   = "출력 장치";
+"settings.audio.system_default"  = "시스템 기본값";
+
+// MARK: - 설정 › 저장
+
+"settings.save.default_bpm"      = "기본 BPM";
+"settings.save.mode"             = "저장 방식";
+"settings.save.directory"        = "저장 경로";
+"settings.save.change"           = "변경";
+"settings.save.mode.dialog"      = "다이얼로그 (BPM 입력)";
+"settings.save.mode.auto"        = "자동 저장 (기본 BPM 사용)";
+
+// MARK: - 설정 › 사운드폰트
+
+/* %d = 용량 (MB) */
+"settings.soundfont.size"        = "약 %d MB";
+"settings.soundfont.installed"   = "설치됨";
+"settings.soundfont.extracting"  = "압축 해제 중...";
+"settings.soundfont.download"    = "다운로드";
+"settings.soundfont.cancel"      = "취소";
+/* %@ = 사운드폰트 이름 */
+"settings.soundfont.accessibility.delete" = "%@ 삭제";
+"settings.soundfont.error.title" = "다운로드 실패";
+"settings.soundfont.error.confirm" = "확인";
+/* %@ = 오류 설명 */
+"settings.soundfont.error.extract" = "압축 해제 실패: %@";
+"settings.soundfont.error.save"    = "저장 실패: %@";
+
+// MARK: - 설정 › 정보
+
+/* %@ = 버전 문자열 */
+"settings.about.version"         = "버전 %@";
+"settings.about.developer"       = "개발자";
+"settings.about.email"           = "이메일";
+"settings.about.github"          = "GitHub";
+"settings.about.bundle_id"       = "번들 ID";
+
+// MARK: - 트리거 행
+
+"trigger.none"                   = "없음";
+"trigger.clear"                  = "지우기";
+"trigger.learn"                  = "감지";
+"trigger.cancel"                 = "취소";
+/* %@ = 역할 레이블 (시작 / 종료) */
+"trigger.accessibility.clear"         = "%@ 트리거 지우기";
+"trigger.accessibility.learn_start"   = "%@ 트리거 감지 시작";
+"trigger.accessibility.learn_cancel"  = "%@ 트리거 감지 취소";
+
+// MARK: - BPM 시트
+
+"bpm.title.save"                 = "레코딩 저장";
+"bpm.title.edit"                 = "BPM 편집";
+"bpm.hint"                       = "BPM을 입력하면 DAW에서\n그리드에 맞게 열립니다";
+"bpm.button.cancel"              = "취소";
+"bpm.button.save"                = "저장";
+
+// MARK: - 악보 뷰어
+
+"score.window.title"             = "Impromptu — 악보";
+"score.empty"                    = "저장된 파일 없음";
+"score.export.converting"        = "변환 중…";
+"score.export.button"            = "PDF 내보내기";
+/* %@ = 오류 설명 */
+"score.export.error.convert"     = "PDF 변환 실패: %@";
+"score.export.error.save"        = "저장 실패: %@";
+"score.button.close"             = "닫기";
