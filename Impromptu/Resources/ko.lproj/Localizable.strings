@@ -35,11 +35,6 @@
 "studio.list.empty"              = "레코딩을 시작하면 여기에 표시됩니다";
 
 "studio.row.unsaved"             = "미저장";
-"studio.row.time.just_now"       = "방금";
-"studio.row.time.today"          = "오늘";
-"studio.row.time.yesterday"      = "어제";
-"studio.row.duration.min_sec"    = "%d분 %d초";
-"studio.row.duration.sec"        = "%d초";
 "studio.row.button.save"         = "저장";
 "studio.row.accessibility.play"  = "재생";
 "studio.row.accessibility.stop"  = "재생 중지";

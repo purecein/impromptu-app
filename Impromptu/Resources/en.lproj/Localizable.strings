@@ -35,11 +35,6 @@
 "studio.list.empty"              = "Recordings will appear here";
 
 "studio.row.unsaved"             = "Unsaved";
-"studio.row.time.just_now"       = "Just now";
-"studio.row.time.today"          = "Today";
-"studio.row.time.yesterday"      = "Yesterday";
-"studio.row.duration.min_sec"    = "%dm %ds";
-"studio.row.duration.sec"        = "%ds";
 "studio.row.button.save"         = "Save";
 "studio.row.accessibility.play"  = "Play";
 "studio.row.accessibility.stop"  = "Stop";

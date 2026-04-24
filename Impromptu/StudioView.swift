@@ -320,24 +320,33 @@ private struct RecordingRow: View {
 
     private var isPlaying: Bool { midiPlayer.isPlaying(item.id) }
 
+    // DateComponentsFormatter: 시스템 로케일 기반 재생 시간 표시
+    // 예) 영어: "2 min, 14 sec" / 한국어: "2분 14초"
+    private static let durationFormatter: DateComponentsFormatter = {
+        let f = DateComponentsFormatter()
+        f.unitsStyle      = .abbreviated
+        f.allowedUnits    = [.minute, .second]
+        f.zeroFormattingBehavior = .dropLeading
+        return f
+    }()
+
+    // RelativeDateTimeFormatter: 시스템 로케일 기반 상대 시간 표시
+    // 예) 영어: "just now", "today", "yesterday", "2 days ago"
+    //     한국어: "방금 전", "오늘", "어제", "2일 전"
+    private static let relativeFormatter: RelativeDateTimeFormatter = {
+        let f = RelativeDateTimeFormatter()
+        f.unitsStyle    = .full
+        f.dateTimeStyle = .named
+        return f
+    }()
+
     private var durationText: String {
         guard let d = item.duration, d > 0 else { return "" }
-        let mins = Int(d) / 60
-        let secs = Int(d) % 60
-        return mins > 0
-            ? String(format: String(localized: "studio.row.duration.min_sec"), mins, secs)
-            : String(format: String(localized: "studio.row.duration.sec"), secs)
+        return Self.durationFormatter.string(from: d) ?? ""
     }
 
     private var relativeTimeText: String {
-        let cal = Calendar.current
-        let now = Date()
-        if now.timeIntervalSince(item.date) < 60 { return String(localized: "studio.row.time.just_now") }
-        if cal.isDateInToday(item.date)           { return String(localized: "studio.row.time.today") }
-        if cal.isDateInYesterday(item.date)       { return String(localized: "studio.row.time.yesterday") }
-        let fmt = DateFormatter()
-        fmt.dateFormat = "yy.MM.dd"
-        return fmt.string(from: item.date)
+        Self.relativeFormatter.localizedString(for: item.date, relativeTo: Date())
     }
 
     var body: some View {
