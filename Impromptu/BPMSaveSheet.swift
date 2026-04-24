@@ -9,7 +9,7 @@ struct BPMSaveSheet: View {
     @State private var bpmText: String
 
     init(
-        title: String = "레코딩 저장",
+        title: String = String(localized: "bpm.title.save"),
         initialBPM: Int = 120,
         onSave: @escaping (Int) -> Void,
         onCancel: @escaping () -> Void
@@ -30,7 +30,7 @@ struct BPMSaveSheet: View {
             Text(title)
                 .font(.title2.bold())
 
-            Text("BPM을 입력하면 DAW에서\n그리드에 맞게 열립니다")
+            Text("bpm.hint")
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.secondary)
                 .font(.subheadline)
@@ -42,9 +42,9 @@ struct BPMSaveSheet: View {
                 .onSubmit { if let bpm = bpmValue { onSave(bpm) } }
 
             HStack(spacing: 12) {
-                Button("취소", role: .cancel) { onCancel() }
+                Button("bpm.button.cancel", role: .cancel) { onCancel() }
                     .keyboardShortcut(.escape, modifiers: [])
-                Button("저장") { if let bpm = bpmValue { onSave(bpm) } }
+                Button("bpm.button.save") { if let bpm = bpmValue { onSave(bpm) } }
                     .buttonStyle(.borderedProminent)
                     .disabled(bpmValue == nil)
                     .keyboardShortcut(.return, modifiers: [])

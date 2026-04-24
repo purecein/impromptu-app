@@ -43,8 +43,8 @@ final class SettingsStore: ObservableObject {
 
         var displayName: String {
             switch self {
-            case .dialog: return "다이얼로그 (BPM 입력)"
-            case .auto:   return "자동 저장 (기본 BPM 사용)"
+            case .dialog: return String(localized: "settings.save.mode.dialog")
+            case .auto:   return String(localized: "settings.save.mode.auto")
             }
         }
     }

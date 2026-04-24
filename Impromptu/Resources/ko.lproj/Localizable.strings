@@ -145,3 +145,26 @@
 "score.export.error.convert"     = "PDF 변환 실패: %@";
 "score.export.error.save"        = "저장 실패: %@";
 "score.button.close"             = "닫기";
+
+// MARK: - 악기 카테고리
+
+"instrument.category.Piano"          = "피아노";
+"instrument.category.Chromatic_Perc" = "반음계 타악기";
+"instrument.category.Organ"          = "오르간";
+"instrument.category.Guitar"         = "기타";
+"instrument.category.Bass"           = "베이스";
+"instrument.category.Strings"        = "현악기";
+"instrument.category.Ensemble"       = "앙상블";
+"instrument.category.Brass"          = "금관악기";
+"instrument.category.Reed"           = "리드";
+"instrument.category.Pipe"           = "관악기";
+"instrument.category.Synth_Lead"     = "신스 리드";
+"instrument.category.Synth_Pad"      = "신스 패드";
+"instrument.category.Synth_FX"       = "신스 FX";
+"instrument.category.Ethnic"         = "민족 악기";
+"instrument.category.Percussive"     = "타악기";
+"instrument.category.Sound_Effects"  = "효과음";
+
+// MARK: - 디버그
+
+"studio.debug.midi_input"            = "MIDI 수신";

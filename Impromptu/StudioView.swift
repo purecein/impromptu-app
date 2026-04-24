@@ -56,7 +56,7 @@ struct StudioView: View {
         .sheet(isPresented: $recordingStore.showBPMSheet,
                onDismiss: recordingStore.cancelSave) {
             BPMSaveSheet(
-                title: "레코딩 저장",
+                title: String(localized: "studio.sheet.bpm_save"),
                 initialBPM: recordingStore.defaultBPM,
                 onSave:   { bpm in recordingStore.savePending(bpm: bpm) },
                 onCancel: recordingStore.cancelSave
@@ -66,7 +66,7 @@ struct StudioView: View {
         // ── BPM 편집 시트 ────────────────────────────────────────────────────
         .sheet(item: $bpmEditItem) { item in
             BPMSaveSheet(
-                title: "BPM 편집",
+                title: String(localized: "studio.sheet.bpm_edit"),
                 initialBPM: item.savedBPM ?? recordingStore.defaultBPM,
                 onSave: { bpm in
                     recordingStore.editBPM(itemID: item.id, newBPM: bpm)
@@ -92,8 +92,8 @@ struct StudioView: View {
 
     private func showDeleteAlert(itemID: UUID) {
         let alert = NSAlert()
-        alert.messageText     = "이 파일을 삭제하시겠습니까?"
-        alert.informativeText = "Finder에서도 파일이 삭제됩니다."
+        alert.messageText     = String(localized: "studio.alert.delete.title")
+        alert.informativeText = String(localized: "studio.alert.delete.message")
         alert.alertStyle      = .warning
 
         // AppIcon.icns 직접 로드 — LaunchServices 캐시 미사용
@@ -102,9 +102,9 @@ struct StudioView: View {
             alert.icon = icon
         }
 
-        let deleteBtn = alert.addButton(withTitle: "삭제")
+        let deleteBtn = alert.addButton(withTitle: String(localized: "studio.alert.delete.confirm"))
         deleteBtn.hasDestructiveAction = true
-        alert.addButton(withTitle: "취소")
+        alert.addButton(withTitle: String(localized: "studio.alert.delete.cancel"))
 
         let perform: (NSApplication.ModalResponse) -> Void = { response in
             guard response == .alertFirstButtonReturn else { return }
@@ -144,7 +144,7 @@ struct StudioView: View {
                 Circle()
                     .fill(recordingStore.isRecording ? Color.red : Color.secondary)
                     .frame(width: 10, height: 10)
-                Text(recordingStore.isRecording ? "레코딩 중" : "대기 중")
+                Text(recordingStore.isRecording ? "studio.status.recording" : "studio.status.idle")
                     .font(.subheadline)
                     .foregroundStyle(recordingStore.isRecording ? .red : .secondary)
             }
@@ -154,7 +154,7 @@ struct StudioView: View {
                 recordingStore.toggleRecording()
             } label: {
                 Label(
-                    recordingStore.isRecording ? "레코딩 종료" : "레코딩 시작",
+                    recordingStore.isRecording ? "studio.button.record_stop" : "studio.button.record_start",
                     systemImage: recordingStore.isRecording
                         ? "stop.circle.fill" : "record.circle"
                 )
@@ -167,8 +167,8 @@ struct StudioView: View {
             .help(
                 !hasActiveSources && !recordingStore.isRecording
                     ? (midiManager.connectedSources.isEmpty
-                       ? "MIDI 장치가 연결되지 않았습니다"
-                       : "모든 MIDI 장치가 비활성화되었습니다. 설정에서 장치를 활성화하세요.")
+                       ? "studio.help.no_device"
+                       : "studio.help.all_disabled")
                     : ""
             )
 
@@ -181,8 +181,8 @@ struct StudioView: View {
 
             // 사운드폰트 선택 — DLS는 항상 첫 번째 항목으로 노출
             HStack(spacing: 6) {
-                Picker("사운드폰트", selection: $selectedSoundFontID) {
-                    Text("시스템 기본 (DLS)").tag(AudioEngine.dlsIdentifier)
+                Picker("studio.picker.soundfont", selection: $selectedSoundFontID) {
+                    Text("studio.soundfont.system_dls").tag(AudioEngine.dlsIdentifier)
                     if !audioEngine.availableSoundFonts.isEmpty {
                         Divider()
                         ForEach(audioEngine.availableSoundFonts) { sf in
@@ -191,7 +191,7 @@ struct StudioView: View {
                     }
                 }
                 .labelsHidden()
-                .accessibilityLabel("사운드폰트 선택")
+                .accessibilityLabel("studio.accessibility.soundfont")
                 .frame(maxWidth: .infinity)
                 .onChange(of: selectedSoundFontID) { id in
                     if id == AudioEngine.dlsIdentifier {
@@ -207,7 +207,7 @@ struct StudioView: View {
 
                 // DLS 선택 시 품질 안내
                 if selectedSoundFontID == AudioEngine.dlsIdentifier {
-                    Label("음질: 낮음", systemImage: "info.circle")
+                    Label("studio.soundfont.low_quality", systemImage: "info.circle")
                         .font(.caption2)
                         .foregroundStyle(.secondary)
                         .fixedSize()
@@ -219,11 +219,11 @@ struct StudioView: View {
                 // 카테고리
                 Picker("", selection: $selectedCategory) {
                     ForEach(InstrumentList.categories, id: \.self) { cat in
-                        Text(cat).tag(cat)
+                        Text(verbatim: InstrumentList.localizedCategory(cat)).tag(cat)
                     }
                 }
                 .labelsHidden()
-                .accessibilityLabel("악기 카테고리 선택")
+                .accessibilityLabel("studio.accessibility.category")
                 .frame(width: 140)
                 .disabled(isPianoOnly)
                 .onChange(of: selectedCategory) { _ in
@@ -241,7 +241,7 @@ struct StudioView: View {
                     }
                 }
                 .labelsHidden()
-                .accessibilityLabel("악기 선택")
+                .accessibilityLabel("studio.accessibility.instrument")
                 .frame(maxWidth: .infinity)
                 .disabled(isPianoOnly)
                 .onChange(of: selectedProgram) { program in
@@ -258,10 +258,10 @@ struct StudioView: View {
     private var recordingsList: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
-                Text("레코딩 파일")
+                Text("studio.list.title")
                     .font(.headline)
                 Spacer()
-                Text("\(recordingStore.items.count)개")
+                Text(verbatim: String(format: String(localized: "studio.list.count"), recordingStore.items.count))
                     .foregroundStyle(.secondary)
                     .font(.subheadline)
             }
@@ -269,7 +269,7 @@ struct StudioView: View {
             .padding(.vertical, 10)
 
             if recordingStore.items.isEmpty {
-                Text("레코딩을 시작하면 여기에 표시됩니다")
+                Text("studio.list.empty")
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -297,7 +297,7 @@ struct StudioView: View {
 
     private var debugSection: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("MIDI 수신")
+            Text("studio.debug.midi_input")
                 .font(.headline)
             Text(midiManager.lastEventDescription)
                 .font(.system(.body, design: .monospaced))
@@ -324,15 +324,17 @@ private struct RecordingRow: View {
         guard let d = item.duration, d > 0 else { return "" }
         let mins = Int(d) / 60
         let secs = Int(d) % 60
-        return mins > 0 ? "\(mins)분 \(secs)초" : "\(secs)초"
+        return mins > 0
+            ? String(format: String(localized: "studio.row.duration.min_sec"), mins, secs)
+            : String(format: String(localized: "studio.row.duration.sec"), secs)
     }
 
     private var relativeTimeText: String {
         let cal = Calendar.current
         let now = Date()
-        if now.timeIntervalSince(item.date) < 60 { return "방금" }
-        if cal.isDateInToday(item.date)           { return "오늘" }
-        if cal.isDateInYesterday(item.date)       { return "어제" }
+        if now.timeIntervalSince(item.date) < 60 { return String(localized: "studio.row.time.just_now") }
+        if cal.isDateInToday(item.date)           { return String(localized: "studio.row.time.today") }
+        if cal.isDateInYesterday(item.date)       { return String(localized: "studio.row.time.yesterday") }
         let fmt = DateFormatter()
         fmt.dateFormat = "yy.MM.dd"
         return fmt.string(from: item.date)
@@ -351,7 +353,7 @@ private struct RecordingRow: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 if !item.isSaved {
-                    Text("미저장")
+                    Text("studio.row.unsaved")
                         .font(.caption)
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
@@ -378,7 +380,7 @@ private struct RecordingRow: View {
 
                 // 미저장: 저장 버튼
                 if !item.isSaved {
-                    Button("저장") { store.retrySave(itemID: item.id) }
+                    Button("studio.row.button.save") { store.retrySave(itemID: item.id) }
                         .font(.caption)
                         .buttonStyle(.bordered)
                         .controlSize(.small)
@@ -399,7 +401,7 @@ private struct RecordingRow: View {
                     .buttonStyle(.bordered)
                     .controlSize(.small)
                     .tint(isPlaying ? .orange : .primary)
-                    .accessibilityLabel(isPlaying ? "재생 중지" : "재생")
+                    .accessibilityLabel(isPlaying ? "studio.row.accessibility.stop" : "studio.row.accessibility.play")
 
                     // 악보 창
                     Button { onShowScore() } label: {
@@ -407,7 +409,7 @@ private struct RecordingRow: View {
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
-                    .accessibilityLabel("악보 보기")
+                    .accessibilityLabel("studio.row.accessibility.score")
 
                     // BPM 편집
                     Button { onBPMEdit() } label: {
@@ -415,7 +417,7 @@ private struct RecordingRow: View {
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
-                    .accessibilityLabel("BPM 편집")
+                    .accessibilityLabel("studio.row.accessibility.bpm")
 
                     // Finder에서 열기
                     Button {
@@ -427,7 +429,7 @@ private struct RecordingRow: View {
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
-                    .accessibilityLabel("Finder에서 열기")
+                    .accessibilityLabel("studio.row.accessibility.finder")
                 }
 
                 // 삭제
@@ -436,7 +438,7 @@ private struct RecordingRow: View {
                 }
                 .buttonStyle(.bordered)
                 .controlSize(.small)
-                .accessibilityLabel("삭제")
+                .accessibilityLabel("studio.row.accessibility.delete")
             }
         }
         .padding(.horizontal)

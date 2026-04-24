@@ -4,13 +4,23 @@ import AppKit
 // MARK: - Section enum
 
 private enum SettingsSection: String, CaseIterable, Identifiable, Hashable {
-    case midi      = "MIDI"
-    case audio     = "오디오"
-    case save      = "저장"
-    case soundFont = "사운드폰트"
-    case about     = "정보"
+    case midi      = "midi"
+    case audio     = "audio"
+    case save      = "save"
+    case soundFont = "soundFont"
+    case about     = "about"
 
     var id: String { rawValue }
+
+    var label: LocalizedStringKey {
+        switch self {
+        case .midi:      return "settings.sidebar.midi"
+        case .audio:     return "settings.sidebar.audio"
+        case .save:      return "settings.sidebar.save"
+        case .soundFont: return "settings.sidebar.soundfont"
+        case .about:     return "settings.sidebar.about"
+        }
+    }
 
     var icon: String {
         switch self {
@@ -41,11 +51,11 @@ struct SettingsView: View {
         }
         .frame(minWidth: 650, minHeight: 450)
         // 다운로드 실패 알림
-        .alert("다운로드 실패", isPresented: Binding(
+        .alert("settings.soundfont.error.title", isPresented: Binding(
             get: { downloader.errorMessage != nil },
             set: { if !$0 { downloader.errorMessage = nil } }
         )) {
-            Button("확인", role: .cancel) { downloader.errorMessage = nil }
+            Button("settings.soundfont.error.confirm", role: .cancel) { downloader.errorMessage = nil }
         } message: {
             Text(downloader.errorMessage ?? "")
         }
@@ -55,7 +65,7 @@ struct SettingsView: View {
 
     private var sidebar: some View {
         List(SettingsSection.allCases, selection: $selectedSection) { section in
-            Label(section.rawValue, systemImage: section.icon)
+            Label(section.label, systemImage: section.icon)
                 .tag(section)
         }
         .listStyle(.sidebar)
@@ -79,9 +89,9 @@ struct SettingsView: View {
 
     private var midiSection: some View {
         Form {
-            Section("입력 장치") {
+            Section("settings.midi.section.devices") {
                 if midiManager.connectedSources.isEmpty {
-                    Text("연결된 MIDI 장치 없음")
+                    Text("settings.midi.no_device")
                         .foregroundStyle(.secondary)
                 } else {
                     ForEach(midiManager.connectedSources, id: \.self) { source in
@@ -95,13 +105,13 @@ struct SettingsView: View {
                     get: { settings.playRecordingSound },
                     set: { settings.playRecordingSound = $0; settings.persist() }
                 )) {
-                    Label("레코딩 시작 / 종료 시 효과음 재생",
+                    Label("settings.midi.sound_effect",
                           systemImage: "speaker.wave.2")
                 }
             }
         }
         .formStyle(.grouped)
-        .navigationTitle("MIDI")
+        .navigationTitle("settings.sidebar.midi")
     }
 
     @ViewBuilder
@@ -118,7 +128,7 @@ struct SettingsView: View {
 
             if isEnabled {
                 TriggerRow(
-                    label:      "시작",
+                    label:      String(localized: "settings.midi.trigger.start"),
                     trigger:    triggers?.start,
                     isLearning: settings.learningTarget == learnStart,
                     onLearn:    { settings.startLearning(source: key, role: .start) },
@@ -128,7 +138,7 @@ struct SettingsView: View {
                 .padding(.leading, 20)
 
                 TriggerRow(
-                    label:      "종료",
+                    label:      String(localized: "settings.midi.trigger.stop"),
                     trigger:    triggers?.stop,
                     isLearning: settings.learningTarget == learnStop,
                     onLearn:    { settings.startLearning(source: key, role: .stop) },
@@ -138,9 +148,12 @@ struct SettingsView: View {
                 .padding(.leading, 20)
 
                 if let target = settings.learningTarget, target.sourceName == key {
-                    let roleName = target.role == .start ? "시작" : "종료"
-                    Label("\(displayName)에서 \(roleName)로 사용할 버튼을 누르세요",
-                          systemImage: "waveform")
+                    let roleName = String(localized: target.role == .start
+                        ? "settings.midi.trigger.role.start"
+                        : "settings.midi.trigger.role.stop")
+                    let hint = String(format: String(localized: "settings.midi.trigger.learn_hint"),
+                                      displayName, roleName)
+                    Label(hint, systemImage: "waveform")
                         .foregroundStyle(.orange)
                         .font(.subheadline)
                         .padding(.leading, 20)
@@ -154,9 +167,9 @@ struct SettingsView: View {
 
     private var audioSection: some View {
         Form {
-            Section("출력") {
-                Picker("출력 장치", selection: $settings.outputDeviceUID) {
-                    Text("시스템 기본값").tag("")
+            Section("settings.audio.section.output") {
+                Picker("settings.audio.output_device", selection: $settings.outputDeviceUID) {
+                    Text("settings.audio.system_default").tag("")
                     ForEach(audioEngine.outputDevices) { device in
                         Text(device.name).tag(device.uid)
                     }
@@ -169,7 +182,7 @@ struct SettingsView: View {
             }
         }
         .formStyle(.grouped)
-        .navigationTitle("오디오")
+        .navigationTitle("settings.sidebar.audio")
     }
 
     // MARK: - 저장 섹션
@@ -178,7 +191,7 @@ struct SettingsView: View {
         Form {
             Section {
                 HStack {
-                    Text("기본 BPM")
+                    Text("settings.save.default_bpm")
                     Spacer()
                     HStack(spacing: 4) {
                         TextField("", value: $settings.defaultBPM, format: .number)
@@ -195,14 +208,14 @@ struct SettingsView: View {
                     .fixedSize()
                 }
 
-                Picker("저장 방식", selection: $settings.saveMode) {
+                Picker("settings.save.mode", selection: $settings.saveMode) {
                     ForEach(SettingsStore.SaveMode.allCases, id: \.self) { mode in
                         Text(mode.displayName).tag(mode)
                     }
                 }
                 .onChange(of: settings.saveMode) { _ in settings.persist() }
 
-                LabeledContent("저장 경로") {
+                LabeledContent("settings.save.directory") {
                     HStack(spacing: 8) {
                         Text(settings.saveDirectory.path)
                             .foregroundStyle(.secondary)
@@ -210,14 +223,14 @@ struct SettingsView: View {
                             .lineLimit(1)
                             .truncationMode(.middle)
                             .frame(maxWidth: 260, alignment: .trailing)
-                        Button("변경") { chooseSaveDirectory() }
+                        Button("settings.save.change") { chooseSaveDirectory() }
                             .controlSize(.small)
                     }
                 }
             }
         }
         .formStyle(.grouped)
-        .navigationTitle("저장")
+        .navigationTitle("settings.sidebar.save")
     }
 
     // MARK: - 사운드폰트 섹션
@@ -231,7 +244,7 @@ struct SettingsView: View {
             }
         }
         .formStyle(.grouped)
-        .navigationTitle("사운드폰트")
+        .navigationTitle("settings.sidebar.soundfont")
     }
 
     // MARK: - 정보 섹션
@@ -249,7 +262,7 @@ struct SettingsView: View {
             }
             .frame(maxWidth: .infinity)
         }
-        .navigationTitle("정보")
+        .navigationTitle("settings.sidebar.about")
     }
 
     /// 앱 아이콘 + 이름 + 버전 헤더
@@ -275,7 +288,7 @@ struct SettingsView: View {
             Text("Impromptu")
                 .font(.system(size: 22, weight: .semibold))
 
-            Text("버전 \(appVersion)")
+            Text(verbatim: String(format: String(localized: "settings.about.version"), appVersion))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
         }
@@ -284,23 +297,23 @@ struct SettingsView: View {
     /// 라벨 + 값 정보 테이블
     private var infoTable: some View {
         VStack(spacing: 0) {
-            infoRow(label: "개발자") {
+            infoRow(label: String(localized: "settings.about.developer")) {
                 Text("Hojun, Lee")
             }
             Divider()
-            infoRow(label: "이메일") {
+            infoRow(label: String(localized: "settings.about.email")) {
                 Link("purecein@gmail.com",
                      destination: URL(string: "mailto:purecein@gmail.com")!)
                     .foregroundStyle(Color.accentColor)
             }
             Divider()
-            infoRow(label: "GitHub") {
+            infoRow(label: String(localized: "settings.about.github")) {
                 Link("github.com/purecein/impromptu-app",
                      destination: URL(string: "https://github.com/purecein/impromptu-app")!)
                     .foregroundStyle(Color.accentColor)
             }
             Divider()
-            infoRow(label: "번들 ID") {
+            infoRow(label: String(localized: "settings.about.bundle_id")) {
                 Text(Bundle.main.bundleIdentifier ?? "net.ceinfactory.app.impromptu")
                     .foregroundStyle(.secondary)
                     .font(.system(.body, design: .monospaced))
@@ -378,7 +391,7 @@ private struct SoundFontEntryRow: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(entry.displayName)
                     .fontWeight(.medium)
-                Text("약 \(entry.expectedSizeMB) MB")
+                Text(verbatim: String(format: String(localized: "settings.soundfont.size"), entry.expectedSizeMB))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -387,7 +400,7 @@ private struct SoundFontEntryRow: View {
 
             if isInstalled {
                 HStack(spacing: 8) {
-                    Text("설치됨")
+                    Text("settings.soundfont.installed")
                         .font(.caption)
                         .foregroundStyle(.green)
                         .padding(.horizontal, 8)
@@ -401,12 +414,12 @@ private struct SoundFontEntryRow: View {
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
-                    .accessibilityLabel("\(entry.displayName) 삭제")
+                    .accessibilityLabel(String(format: String(localized: "settings.soundfont.accessibility.delete"), entry.displayName))
                 }
             } else if isExtracting {
                 HStack(spacing: 6) {
                     ProgressView().controlSize(.small)
-                    Text("압축 해제 중...")
+                    Text("settings.soundfont.extracting")
                         .font(.caption2)
                         .foregroundStyle(.secondary)
                 }
@@ -420,11 +433,11 @@ private struct SoundFontEntryRow: View {
                         .foregroundStyle(.secondary)
                         .monospacedDigit()
                         .frame(width: 32, alignment: .trailing)
-                    Button("취소") { downloader.cancelDownload() }
+                    Button("settings.soundfont.cancel") { downloader.cancelDownload() }
                         .controlSize(.mini)
                 }
             } else {
-                Button("다운로드") { downloader.startDownload(for: entry) }
+                Button("settings.soundfont.download") { downloader.startDownload(for: entry) }
                     .controlSize(.small)
                     .disabled(isOtherBusy)
             }
@@ -457,25 +470,25 @@ private struct TriggerRow: View {
                     .padding(.vertical, 2)
                     .background(Color.accentColor.opacity(0.1))
                     .clipShape(RoundedRectangle(cornerRadius: 4))
-                Button("지우기", role: .destructive) { onClear() }
+                Button("trigger.clear", role: .destructive) { onClear() }
                     .controlSize(.mini)
-                    .accessibilityLabel("\(label) 트리거 지우기")
+                    .accessibilityLabel(String(format: String(localized: "trigger.accessibility.clear"), label))
             } else {
-                Text("없음")
+                Text("trigger.none")
                     .foregroundStyle(.tertiary)
                     .font(.subheadline)
             }
 
             Spacer()
 
-            Button(isLearning ? "취소" : "감지") {
+            Button(isLearning ? "trigger.cancel" : "trigger.learn") {
                 isLearning ? onCancel() : onLearn()
             }
             .controlSize(.small)
             .tint(isLearning ? .orange : .accentColor)
             .accessibilityLabel(isLearning
-                ? "\(label) 트리거 감지 취소"
-                : "\(label) 트리거 감지 시작")
+                ? String(format: String(localized: "trigger.accessibility.learn_cancel"), label)
+                : String(format: String(localized: "trigger.accessibility.learn_start"), label))
         }
     }
 }

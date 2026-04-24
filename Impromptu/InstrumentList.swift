@@ -163,4 +163,11 @@ enum InstrumentList {
     static func instruments(in category: String) -> [Instrument] {
         all.filter { $0.category == category }
     }
+
+    /// 카테고리 영문 이름을 현재 로케일에 맞게 반환.
+    /// 키: instrument.category.Piano, instrument.category.Synth_Lead 등 (공백 → _)
+    static func localizedCategory(_ category: String) -> String {
+        let key = "instrument.category.\(category.replacingOccurrences(of: " ", with: "_"))"
+        return NSLocalizedString(key, comment: "")
+    }
 }

@@ -14,12 +14,12 @@ struct AppMenu: View {
     }
 
     var body: some View {
-        Text("Impromptu — \(recordingStore.isRecording ? "레코딩 중" : "대기 중")")
+        (Text(verbatim: "Impromptu — ") + Text(recordingStore.isRecording ? "menubar.title.recording" : "menubar.title.idle"))
             .foregroundStyle(.secondary)
 
         Divider()
 
-        Button(recordingStore.isRecording ? "레코딩 종료" : "레코딩 시작") {
+        Button(recordingStore.isRecording ? "menubar.button.record_stop" : "menubar.button.record_start") {
             recordingStore.toggleRecording()
         }
         .keyboardShortcut("r", modifiers: .command)
@@ -28,19 +28,19 @@ struct AppMenu: View {
         // 활성 장치가 없을 때 이유 표시
         if !hasActiveSources && !recordingStore.isRecording {
             Text(midiManager.connectedSources.isEmpty
-                 ? "MIDI 장치가 연결되지 않았습니다"
-                 : "모든 MIDI 장치가 비활성화되었습니다")
+                 ? "menubar.status.no_device"
+                 : "menubar.status.all_disabled")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
 
-        Button("스튜디오 열기") {
+        Button("menubar.button.open_studio") {
             NSApp.activate(ignoringOtherApps: true)
             openWindow(id: "studio")
         }
         .keyboardShortcut("o", modifiers: .command)
 
-        Button("설정...") {
+        Button("menubar.button.settings") {
             NSApp.activate(ignoringOtherApps: true)
             openWindow(id: "settings")
         }
@@ -48,7 +48,7 @@ struct AppMenu: View {
 
         Divider()
 
-        Button("종료") { NSApplication.shared.terminate(nil) }
+        Button("menubar.button.quit") { NSApplication.shared.terminate(nil) }
             .keyboardShortcut("q", modifiers: .command)
     }
 }

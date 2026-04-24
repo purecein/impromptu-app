@@ -145,3 +145,26 @@
 "score.export.error.convert"     = "PDF conversion failed: %@";
 "score.export.error.save"        = "Save failed: %@";
 "score.button.close"             = "Close";
+
+// MARK: - Instrument Categories
+
+"instrument.category.Piano"          = "Piano";
+"instrument.category.Chromatic_Perc" = "Chromatic Perc";
+"instrument.category.Organ"          = "Organ";
+"instrument.category.Guitar"         = "Guitar";
+"instrument.category.Bass"           = "Bass";
+"instrument.category.Strings"        = "Strings";
+"instrument.category.Ensemble"       = "Ensemble";
+"instrument.category.Brass"          = "Brass";
+"instrument.category.Reed"           = "Reed";
+"instrument.category.Pipe"           = "Pipe";
+"instrument.category.Synth_Lead"     = "Synth Lead";
+"instrument.category.Synth_Pad"      = "Synth Pad";
+"instrument.category.Synth_FX"       = "Synth FX";
+"instrument.category.Ethnic"         = "Ethnic";
+"instrument.category.Percussive"     = "Percussive";
+"instrument.category.Sound_Effects"  = "Sound Effects";
+
+// MARK: - Debug
+
+"studio.debug.midi_input"            = "MIDI Input";

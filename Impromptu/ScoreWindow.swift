@@ -37,7 +37,7 @@ final class ScoreWindowManager {
         let hosting = NSHostingController(rootView: content)
 
         let window = NSWindow(contentViewController: hosting)
-        window.title = "Impromptu — 악보"
+        window.title = String(localized: "score.window.title")
         window.setContentSize(NSSize(width: 820, height: 262))
         window.minSize       = NSSize(width: 600, height: 262)
         window.styleMask     = [.titled, .closable, .resizable, .miniaturizable]
@@ -126,7 +126,7 @@ struct ScoreWindowContent: View {
                 })
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
-                Text("저장된 파일 없음")
+                Text("score.empty")
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
@@ -139,16 +139,16 @@ struct ScoreWindowContent: View {
                 exportPDF()
             } label: {
                 if isExporting {
-                    Label("변환 중…", systemImage: "arrow.down.document")
+                    Label("score.export.converting", systemImage: "arrow.down.document")
                 } else {
-                    Label("PDF 내보내기", systemImage: "arrow.down.document")
+                    Label("score.export.button", systemImage: "arrow.down.document")
                 }
             }
             .buttonStyle(.bordered)
             .disabled(isExporting || holder.webView == nil)
 
             if let err = exportError {
-                Text(err)
+                Text(verbatim: err)
                     .font(.caption)
                     .foregroundStyle(.red)
                     .lineLimit(1)
@@ -156,7 +156,7 @@ struct ScoreWindowContent: View {
 
             Spacer()
 
-            Button("닫기") { onClose() }
+            Button("score.button.close") { onClose() }
                 .buttonStyle(.bordered)
         }
         .padding(.horizontal, 16)
@@ -204,7 +204,7 @@ struct ScoreWindowContent: View {
                     case .success(let data):
                         self.runSavePanel(data: data)
                     case .failure(let err):
-                        self.exportError = "PDF 변환 실패: \(err.localizedDescription)"
+                        self.exportError = String(format: String(localized: "score.export.error.convert"), err.localizedDescription)
                     }
                 }
             }
@@ -228,7 +228,7 @@ struct ScoreWindowContent: View {
                 try data.write(to: url)
             } catch {
                 DispatchQueue.main.async {
-                    self.exportError = "저장 실패: \(error.localizedDescription)"
+                    self.exportError = String(format: String(localized: "score.export.error.save"), error.localizedDescription)
                 }
             }
         }
