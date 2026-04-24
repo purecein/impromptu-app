@@ -35,7 +35,7 @@ struct ImpromptuApp: App {
         }
         .menuBarExtraStyle(.menu)
 
-        Window("Impromptu — 스튜디오", id: "studio") {
+        Window("app.window.studio", id: "studio") {
             StudioView()
                 .environmentObject(services.midiManager)
                 .environmentObject(services.recordingStore)
@@ -46,7 +46,7 @@ struct ImpromptuApp: App {
         .defaultSize(width: 480, height: 580)
         .windowResizability(.contentSize)
 
-        Window("설정", id: "settings") {
+        Window("app.window.settings", id: "settings") {
             SettingsView()
                 .environmentObject(services.midiManager)
                 .environmentObject(services.audioEngine)

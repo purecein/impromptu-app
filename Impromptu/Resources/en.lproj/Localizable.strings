@@ -2,6 +2,11 @@
    Impromptu — Localizable.strings (English)
    ============================================================= */
 
+// MARK: - Window Titles
+
+"app.window.studio"                         = "Impromptu — Studio";
+"app.window.settings"                       = "Settings";
+
 // MARK: - Menu Bar
 
 "menubar.title.idle"             = "Idle";
@@ -83,6 +88,7 @@
 "settings.save.mode"             = "Save Mode";
 "settings.save.directory"        = "Save Directory";
 "settings.save.change"           = "Change";
+"settings.save.directory.select" = "Select";
 "settings.save.mode.dialog"      = "Dialog (Enter BPM)";
 "settings.save.mode.auto"        = "Auto Save (Use Default BPM)";
 
@@ -99,8 +105,12 @@
 "settings.soundfont.error.title" = "Download Failed";
 "settings.soundfont.error.confirm" = "OK";
 /* %@ = error description */
-"settings.soundfont.error.extract" = "Extraction failed: %@";
-"settings.soundfont.error.save"    = "Save failed: %@";
+"settings.soundfont.error.extract"      = "Extraction failed: %@";
+"settings.soundfont.error.save"         = "Save failed: %@";
+/* %d = exit code */
+"settings.soundfont.error.extract_code" = "Extraction failed (exit code %d)";
+"settings.soundfont.error.sf2_not_found"= "SF2 file not found in ZIP";
+"settings.soundfont.error.temp_save"    = "Temp file save failed: %@";
 
 // MARK: - Settings › About
 

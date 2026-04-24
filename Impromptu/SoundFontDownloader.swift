@@ -169,7 +169,7 @@ final class SoundFontDownloadManager: NSObject, ObservableObject {
             DispatchQueue.main.async {
                 self.downloadingID = nil
                 self.activeEntry   = nil
-                self.errorMessage  = "저장 실패: \(error.localizedDescription)"
+                self.errorMessage  = String(format: String(localized: "settings.soundfont.error.save"), error.localizedDescription)
             }
         }
     }
@@ -201,7 +201,8 @@ final class SoundFontDownloadManager: NSObject, ObservableObject {
                     throw NSError(
                         domain: "Downloader", code: Int(process.terminationStatus),
                         userInfo: [NSLocalizedDescriptionKey:
-                            "압축 해제 실패 (종료 코드 \(process.terminationStatus))"])
+                            String(format: String(localized: "settings.soundfont.error.extract_code"),
+                                   process.terminationStatus)])
                 }
 
                 // tempDir 안에서 첫 번째 .sf2 파일 탐색
@@ -209,7 +210,7 @@ final class SoundFontDownloadManager: NSObject, ObservableObject {
                     throw NSError(
                         domain: "Downloader", code: -1,
                         userInfo: [NSLocalizedDescriptionKey:
-                            "ZIP 안에서 SF2 파일을 찾을 수 없습니다."])
+                            String(localized: "settings.soundfont.error.sf2_not_found")])
                 }
 
                 try FileManager.default.createDirectory(
@@ -236,7 +237,7 @@ final class SoundFontDownloadManager: NSObject, ObservableObject {
                     self.downloadingID = nil
                     self.isExtracting  = false
                     self.activeEntry   = nil
-                    self.errorMessage  = "압축 해제 실패: \(error.localizedDescription)"
+                    self.errorMessage  = String(format: String(localized: "settings.soundfont.error.extract"), error.localizedDescription)
                 }
             }
         }
@@ -297,7 +298,7 @@ extension SoundFontDownloadManager: URLSessionDownloadDelegate {
                 DispatchQueue.main.async {
                     self.downloadingID = nil
                     self.activeEntry   = nil
-                    self.errorMessage  = "임시 저장 실패: \(error.localizedDescription)"
+                    self.errorMessage  = String(format: String(localized: "settings.soundfont.error.temp_save"), error.localizedDescription)
                 }
                 return
             }

@@ -366,7 +366,7 @@ struct SettingsView: View {
         panel.canChooseFiles          = false
         panel.allowsMultipleSelection = false
         panel.directoryURL            = settings.saveDirectory
-        panel.prompt                  = "선택"
+        panel.prompt                  = String(localized: "settings.save.directory.select")
         if panel.runModal() == .OK, let url = panel.url {
             settings.saveDirectory = url
             settings.persist()

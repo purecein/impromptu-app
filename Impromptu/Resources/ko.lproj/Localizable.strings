@@ -2,6 +2,11 @@
    Impromptu — Localizable.strings (한국어)
    ============================================================= */
 
+// MARK: - 윈도우 제목
+
+"app.window.studio"                         = "Impromptu — 스튜디오";
+"app.window.settings"                       = "설정";
+
 // MARK: - 메뉴바
 
 "menubar.title.idle"             = "대기 중";
@@ -83,6 +88,7 @@
 "settings.save.mode"             = "저장 방식";
 "settings.save.directory"        = "저장 경로";
 "settings.save.change"           = "변경";
+"settings.save.directory.select" = "선택";
 "settings.save.mode.dialog"      = "다이얼로그 (BPM 입력)";
 "settings.save.mode.auto"        = "자동 저장 (기본 BPM 사용)";
 
@@ -99,8 +105,12 @@
 "settings.soundfont.error.title" = "다운로드 실패";
 "settings.soundfont.error.confirm" = "확인";
 /* %@ = 오류 설명 */
-"settings.soundfont.error.extract" = "압축 해제 실패: %@";
-"settings.soundfont.error.save"    = "저장 실패: %@";
+"settings.soundfont.error.extract"      = "압축 해제 실패: %@";
+"settings.soundfont.error.save"         = "저장 실패: %@";
+/* %d = 종료 코드 */
+"settings.soundfont.error.extract_code" = "압축 해제 실패 (종료 코드 %d)";
+"settings.soundfont.error.sf2_not_found"= "ZIP 안에서 SF2 파일을 찾을 수 없습니다";
+"settings.soundfont.error.temp_save"    = "임시 저장 실패: %@";
 
 // MARK: - 설정 › 정보
 
